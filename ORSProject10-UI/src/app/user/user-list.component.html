@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<div align="center" style="padding-top: 1%; padding-bottom:4%;">
+  <h1 align="center" style="margin-bottom: -15; color: navy;">User
+    List</h1>
+  <table style="width: 30%">
+    <tr>
+      <td><input type="text" name="firstName" [(ngModel)]="form.searchParams.firstName"
+          placeholder="Enter First Name Here" style="margin-right: 5px;" /></td>
+      <td><input type="date" name="dob" [(ngModel)]="form.searchParams.dob" placeholder="Enter Date Of Birth Here"
+          style="margin-right: 5px;" /></td>
+      <td> <select name="roleId" [(ngModel)]="form.searchParams.roleId">
+          <option [ngValue]="" value="undefined">{{'------Select Role-------' }}</option>
+          <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
+        </select></td>
+      <td>
+        <button (click)="search()">search</button>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <table border="1" style="width: 100%; border: groove;">
+    <tr style="background-color: #e1e6f1e3;">
+      <th width="5%" style="text-align: center;">Select</th>
+      <th width="5%" style="text-align: center;">S.No.</th>
+      <th width="5%" style="text-align: center;">Image</th>
+      <th width="13%" style="text-align: center;">FirstName</th>
+      <th width="13%" style="text-align: center;">LastName</th>
+      <th width="13%" style="text-align: center;">LoginId</th>
+      <th width="8%" style="text-align: center;">Password</th>
+      <th width="8%" style="text-align: center;">Role</th>
+      <th width="13%" style="text-align: center;">DOB</th>
+      <th width="5%" style="text-align: center;">Edit</th>
+    </tr>
+    <tr *ngFor="let m of form.list; let i = index">
+      <td style="text-align: center;">
+        <input type="checkbox" #checkboxes name="list_name" id="{{m.id}}" value="{{isMasterSel}}" />
+      </td>
+      <td style="text-align: center;">{{(form.pageNo*5)+i+ 1}}</td>
+      <td>
+        <div *ngIf="m.imageId">
+          <img src="http://localhost:8080/User/profilePic/{{m.id}}" height="55px" width="80px">
+        </div>
+        <div *ngIf="!m.imageId">
+          <img src="../../assets/files/default.jpg" height="55px" width="80px">
+        </div>
+      </td>
+      <td style="text-align: center;">
+        {{m.firstName}}
+      </td>
+      <td style="text-align: center;">
+        {{m.lastName}}
+      </td>
+      <td style="text-align: center;">
+        {{m.loginId}}
+      </td>
+      <td style="text-align: center;">
+        {{m.password}}
+      </td>
+      <td style="text-align: center;">
+        {{m.roleName}}
+      </td>
+      <td style="text-align: center;">
+        {{m.dob | date : 'dd-MM-yyyy'}}
+      </td>
+      <td style="text-align: center;"> <a (click)="edit( '/user/' +  m.id)" style="color: blue;">edit
+        </a></td>
+    </tr>
+  </table>
+  <table style="width: 100%">
+    <tr>
+      <td style="width: 25%"><button [disabled]="form.pageNo == 0" (click)="previous()">previous</button></td>
+      <td align="center" style="width: 25%"><button (click)="add()">add</button></td>
+      <td align="center" style="width: 25%"><button (click)="delete()">delete</button></td>
+      <td style="width: 25%" align="right"><button [disabled]="form.list.length < 5" (click)="next()">next</button></td>
+    </tr>
+  </table>
+</div>
+<app-footer></app-footer>

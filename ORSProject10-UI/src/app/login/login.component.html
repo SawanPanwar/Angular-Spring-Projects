@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<style>
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+
+  .success {
+    color: green;
+    font-weight: bold;
+  }
+
+  input,
+  select {
+    width: 250px;
+  }
+
+  th,
+  td {
+    padding: 5px;
+  }
+</style>
+<br><br>
+<div align="center">
+  <h1 style="color: navy;">Login</h1>
+  <div style="height: 15px; margin-bottom: 12px" align="center" class="error" *ngIf="form.error">
+    {{ form.message }}
+  </div>
+  <table>
+    <tr>
+      <th>Login ID :</th>
+      <td><input type="text" name="loginId" [(ngModel)]="form.loginId" /> </td>
+      <td *ngIf="inputerror.loginId != null" class="error" style="position: fixed;">
+        {{inputerror.loginId}}
+      </td>
+    </tr>
+    <tr>
+      <th>Password :</th>
+      <td><input type="text" name="password" [(ngModel)]="form.password" /> </td>
+      <td *ngIf="inputerror.password != null" class="error" style="position: fixed;">
+        {{inputerror.password}}
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>
+        <button (click)="signIn()" style="margin-right: 5px;">signIn</button>
+        <button (click)="signUp()">signUp</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,90 @@
+<app-navbar></app-navbar>
+<style>
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+
+  .success {
+    color: green;
+    font-weight: bold;
+  }
+
+  input,
+  select {
+    width: 250px;
+  }
+
+  th,
+  td {
+    padding: 5px;
+  }
+</style>
+<div align="center" style="padding-top: 1%; padding-bottom:4%;">
+  <h2 style="color: navy">Add User</h2>
+  <div style="height: 15px; margin-bottom: 12px" align="center" class="success" *ngIf="form.message">
+    {{ form.message }}
+  </div>
+  <table>
+    <tr>
+      <th>Role Name : </th>
+      <td> <select name="roleId" [(ngModel)]="form.data.roleId">
+          <option [ngValue]="" value="undefined">{{'------Select Role-------' }}</option>
+          <option *ngFor="let obj of form.preload.roleList" [value]="obj.key">{{obj.value}}</option>
+        </select></td>
+    </tr>
+    <tr>
+      <th>First Name : </th>
+      <td><input type="text" name="firstName" [(ngModel)]="form.data.firstName" /> </td>
+      <td *ngIf="inputerror.firstName != null" class="error" style="position: fixed;">
+        {{inputerror.firstName}}
+      </td>
+    </tr>
+    <tr>
+      <th>Last Name : </th>
+      <td><input type="text" name="lastName" [(ngModel)]="form.data.lastName" /> </td>
+      <td *ngIf="inputerror.lastName != null" class="error" style="position: fixed;">
+        {{inputerror.lastName}}
+      </td>
+    </tr>
+    <tr>
+      <th>Login ID : </th>
+      <td><input type="text" name="loginId" [(ngModel)]="form.data.loginId" /> </td>
+      <td *ngIf="inputerror.loginId != null" class="error" style="position: fixed;">
+        {{inputerror.loginId}}
+      </td>
+    </tr>
+    <tr>
+      <th>Password : </th>
+      <td><input type="text" name="password" [(ngModel)]="form.data.password" /> </td>
+      <td *ngIf="inputerror.password != null" class="error" style="position: fixed;">
+        {{inputerror.password}}
+      </td>
+    </tr>
+    <tr>
+      <th>DOB : </th>
+      <td><input type="date" name="dob | date : 'yyyy-MM-dd'" [(ngModel)]="form.data.dob" /> </td>
+    </tr>
+    <tr>
+      <th>Profile : </th>
+      <td>
+        <div *ngIf="form.data.id">
+          <img src="http://localhost:8080/User/profilePic/{{form.data.id}}" height="55px" width="80px">
+        </div>
+        <div *ngIf="!form.data.id">
+          <img src="../../assets/files/default.jpg" height="55px" width="80px">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>Image : </th>
+      <td><input type="file" id="customFile" name="imageId" (change)="onFileSelect($event.target.files)"
+          accept="image/*"> </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><button (click)="submit()">save</button></td>
+    </tr>
+  </table>
+</div>
+<app-footer></app-footer>

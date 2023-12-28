@@ -1,0 +1,40 @@
+<style>
+  .dark-hr {
+    border-color: darkgray;
+  }
+</style>
+<table width="100%" border="0">
+  <tr>
+    <td width="90%">
+      <a href="/dashboard"><b>Dashboard</b></a> |
+      <ng-container *ngIf="isLogin(); else el">
+        <a (click)="logout()">
+          <font color="blue"><b>Logout</b></font>
+        </a>
+      </ng-container>
+      <ng-template #el>
+        <a href="/login"><b>Login</b></a>
+      </ng-template>
+    </td>
+    <td rowspan="2">
+      <a href="/dashboard">
+        <img src="assets\files\logo.png" height="25px" width="120px" alt="Logo">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <ng-container *ngIf="isLogin(); else elseBlock">
+        <a href="/login">
+          <font color="black"><b>Hi, {{form.data.fname }} ({{form.data.role}})</b></font>
+        </a> |
+        <a href="/user"><b>Add User</b></a> |
+        <a href="/userlist"><b>User List</b></a>
+      </ng-container>
+      <ng-template #elseBlock>
+        <b>Hi, Guest</b><br>
+      </ng-template>
+    </td>
+  </tr>
+</table>
+<hr class="dark-hr">

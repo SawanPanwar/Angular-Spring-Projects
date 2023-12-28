@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<style>
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+
+  .success {
+    color: green;
+    font-weight: bold;
+  }
+
+  input,
+  select {
+    width: 250px;
+  }
+
+  th,
+  td {
+    padding: 5px;
+  }
+</style>
+<div align="center">
+  <h2 style="color: navy">User Registration</h2>
+  <div style="height: 15px; margin-bottom: 12px" align="center" class="success" *ngIf="form.message">
+    {{ form.message }}
+  </div>
+  <table>
+    <tr>
+      <th>first Name :</th>
+      <td><input type="text" name="firstName" [(ngModel)]="form.data.firstName" /> </td>
+      <td *ngIf="inputerror.firstName != null" class="error" style="position: fixed;">
+        {{inputerror.firstName}}
+      </td>
+    </tr>
+    <tr>
+      <th>Last Name :</th>
+      <td><input type="text" name="lastName" [(ngModel)]="form.data.lastName" /> </td>
+      <td *ngIf="inputerror.lastName != null" class="error" style="position: fixed;">
+        {{inputerror.lastName}}
+      </td>
+    </tr>
+    <tr>
+      <th>Login ID :</th>
+      <td><input type="text" name="loginId" [(ngModel)]="form.data.loginId" /> </td>
+      <td *ngIf="inputerror.loginId != null" class="error" style="position: fixed;">
+        {{inputerror.loginId}}
+      </td>
+    </tr>
+    <tr>
+      <th>Password :</th>
+      <td><input type="text" name="password" [(ngModel)]="form.data.password" /> </td>
+      <td *ngIf="inputerror.password != null" class="error" style="position: fixed;">
+        {{inputerror.password}}
+      </td>
+    </tr>
+    <tr>
+      <th>DOB :</th>
+      <td><input type="date" name="dob" [(ngModel)]="form.data.dob" /> </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><button (click)="signUp()">signUp</button></td>
+    </tr>
+  </table>
+</div>
+<app-footer></app-footer>
